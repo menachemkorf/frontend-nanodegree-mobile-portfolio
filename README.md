@@ -2,11 +2,11 @@
 
 Here's a sample portfolio website optimized for fast load time and better user experience.
 
-To open download the repo to your machine and open the index.html in your browser, for the pizza page click on the Cam's Pizzeria link.
+To open, download the repo to your machine, and open the index.html in your browser, for the pizza page click on the Cam's Pizzeria link.
 
-The main page downloads quickly by minimizing the critical rendering path. I've tested it in pagespeedinsights from google (using ngrok) and got a score of 93 for desktop and 94 for mobile.
+The main page downloads quickly by minimizing the critical rendering path. I've tested it in PageSpeedInsights from google (using ngrok) and got a score of 93 for desktop and 94 for mobile.
 
-When you scroll in the pizza page the pizzas will animate smoothly at a frame rate 60 frames per second. When you change the pizza size it responds in less than 5 ms.
+When you scroll in the pizza page the pizzas will animate smoothly at a frame rate of 60 frames per second. When you change the pizza size it responds in less than 5 ms.
 
 ### Key optimizations for index.html
 
