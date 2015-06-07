@@ -448,15 +448,14 @@ var resizePizzas = function(size) {
     return dx;
   }
 
-  //took var dx out of for loop
-  //so it only triggers layout once
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    var pizzas = document.querySelectorAll(".randomPizzaContainer");
-    var dx = determineDx(pizzas[i], size);
-    for (var i = 0; i < pizzas.length; i++) {
-      var newwidth = (pizzas[i].offsetWidth + dx) + 'px';
-      pizzas[i].style.width = newwidth;
+    //took var dx and newwidth out of for loop
+    //so it only triggers layout once
+    var dx = determineDx(document.querySelector(".randomPizzaContainer"), size);
+    var newwidth = (document.querySelector(".randomPizzaContainer").offsetWidth + dx) + 'px';
+    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
+      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
 
@@ -500,17 +499,19 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+
+//took var phase out of for loop, so it only triggers layout once
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
-  var numPizzas = items.length;
-  var phase = Math.sin((document.body.scrollTop / 1250) + (numPizzas % 5));
+  var len = items.length;
+  var phase = Math.sin((document.body.scrollTop / 1250) + (len % 5));
+//console.log(numPizzas);
 
-
-  for (var i = 0; i < numPizzas.length; i++) {
+  for (var i = 0; i < len; i++) {
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 

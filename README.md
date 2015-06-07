@@ -4,7 +4,7 @@ Here's a sample portfolio website optimized for fast load time and better user e
 
 To open download the repo to your machine and open the index.html in your browser, for the pizza page click on the Cam's Pizzeria link.
 
-The main page downloads quickly by minimizing the critical rendering path. I've tested it in pagespeedinsights from google (using ngrok) and got a score of 93 for desktop and 94 for mobile.
+The main page downloads quickly by minimizing the critical rendering path. I've tested it in pagespeedinsights from google (using ngrok) and got a score of 96 for desktop and 95 for mobile.
 
 When you scroll in the pizza page the pizzas will animate smoothly at a frame rate 60 frames per second. When you change the pizza size it responds in less than 5 ms.
 
@@ -19,6 +19,8 @@ Optimized the CRP with the following optimizations:
 * Called the function for google analytics after everything else is downloaded with window.onload().
 
 * Async google analytics third party script.
+
+* Optimized profilepic.jpg from 14 KB to 1.64 KB.
 
 (I've used gulp for some of the above tasks).
 
