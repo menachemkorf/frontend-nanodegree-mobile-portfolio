@@ -403,16 +403,17 @@ var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
+  // Changed querySelector to getElementById for better performance
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -450,12 +451,20 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    //took var dx and newwidth out of for loop
-    //so it only triggers layout once
-    var dx = determineDx(document.querySelector(".randomPizzaContainer"), size);
-    var newwidth = (document.querySelector(".randomPizzaContainer").offsetWidth + dx) + 'px';
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+
+    //Changed querySelectorAll to getElementsByClassName for better performance.
+    //Place all pizza elements in a local variable, so it doesn't need to call the getElementsByClassName method multiple times.
+    var pizzaList = document.getElementsByClassName("randomPizzaContainer");
+
+    //Took var dx and newwidth out of for loop, so it only triggers layout once.
+    //Only need one pizza to calculate size.
+    var dx = determineDx(pizzaList[0], size);
+    var newwidth = (pizzaList[0].offsetWidth + dx) + 'px';
+
+    //Save pizzas.length into a local variable so that it doesn't need to calculate every iteration.
+    var len = pizzaList.length;
+    for (var i = 0; i < len; i++) {
+      pizzaList[i].style.width = newwidth;
     }
   }
 
@@ -470,9 +479,10 @@ var resizePizzas = function(size) {
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
+//Took pizzasDiv out of loop, don't need to getElemnt every itiration.
+var pizzasDiv = document.getElementById("randomPizzas");
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -506,10 +516,14 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  //Changed querySelectorAll to getElementsByClassName for better performance.
+  var items = document.getElementsByClassName('mover');
+
+  //Save pizzas.length into a local variable so that it doesn't need to calculate every iteration.
   var len = items.length;
+
+  //Took var phase out of for loop, so it only triggers layout once.
   var phase = Math.sin((document.body.scrollTop / 1250) + (len % 5));
-//console.log(numPizzas);
 
   for (var i = 0; i < len; i++) {
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
@@ -528,6 +542,7 @@ function updatePositions() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
+
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
@@ -541,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
-    console.log("cols:", (Math.floor(i / cols) * s))
+
   }
   updatePositions();
 });
