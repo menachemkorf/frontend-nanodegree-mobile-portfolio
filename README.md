@@ -26,8 +26,10 @@ Optimized the CRP with the following optimizations:
 
 ### Key optimizations for the pizza page
 
-* In style.css the mover class' backface-visibility is set to hidden, in order to promote the class to its own layer, so that when you scroll the browser doesn't paint the entire page.
+* In style.css, the mover class' backface-visibility is set to hidden, in order to promote the class to its own layer, so that when you scroll the browser doesn't paint the entire page.
 
-* In main.js in the changePizzaSizes function var dx is taken out of the for loop, so that it only triggers layout once, thus reducing the time to change pizza size.
+* In main.js, in the changePizzaSizes function, var dx is taken out of the for loop, so that it only triggers layout once, thus reducing the time to change pizza size.
 
-* In main.js in the updatePositions function var phase is taken out of the for loop, so that it only triggers layout once, thus allowing animation at 60 frames per second.
+* In main.js, in the updatePositions function, var phase is taken out of the for loop, so that it only triggers layout once, thus allowing animation at 60 frames per second.
+
+* In main.js, in the function that generates the sliding pizzas when the page loads, calculates the amount of pizzas needed based on the window size, so that it doesn't need to generate unnecessary pizzas.
