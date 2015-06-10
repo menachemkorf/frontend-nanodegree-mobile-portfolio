@@ -22,7 +22,9 @@ Optimized the CRP with the following optimizations:
 
 * Optimized profilepic.jpg from 14 KB to 1.64 KB.
 
-(I've used gulp for some of the above tasks).
+I've used gulp for some of the above tasks.
+
+(I included the original file as original.index.html, and the unminfied optimized file as pretty.index.html)
 
 ### Key optimizations for the pizza page
 
