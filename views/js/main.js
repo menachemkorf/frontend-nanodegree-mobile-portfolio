@@ -509,8 +509,6 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
-
-//took var phase out of for loop, so it only triggers layout once
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
@@ -519,13 +517,11 @@ function updatePositions() {
   //Changed querySelectorAll to getElementsByClassName for better performance.
   var items = document.getElementsByClassName('mover');
 
-  //Save pizzas.length into a local variable so that it doesn't need to calculate every iteration.
-  var len = items.length;
+  //Took calculations out of for loop, so it only triggers layout once.
+  var calc = document.body.scrollTop / 1250;
 
-  //Took var phase out of for loop, so it only triggers layout once.
-  var phase = Math.sin((document.body.scrollTop / 1250) + (len % 5));
-
-  for (var i = 0; i < len; i++) {
+  for (var i = 0; i < items.length; i++) {
+    var phase = Math.sin((calc) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -538,6 +534,7 @@ function updatePositions() {
     logAverageFrame(timesToUpdatePosition);
   }
 }
+
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
@@ -567,8 +564,6 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);
   }
-
-  console.log('Amount of pizzas generated: ' + pizzas);
 
   updatePositions();
 });
