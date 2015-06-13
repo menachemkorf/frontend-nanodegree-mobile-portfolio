@@ -535,7 +535,6 @@ function updatePositions() {
   }
 }
 
-
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
