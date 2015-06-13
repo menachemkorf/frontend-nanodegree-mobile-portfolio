@@ -22,6 +22,8 @@ Optimized the CRP with the following optimizations:
 
 * Optimized profilepic.jpg from 14 KB to 1.64 KB.
 
+* Resized pizzeria.jpg from 2048 by 1536 px (2.25 MB) to 100 by 75 px (22.8 KB).
+
 I've used gulp for some of the above tasks.
 
 (I included the original file as original.index.html, and the unminfied optimized file as pretty.index.html)
@@ -32,6 +34,6 @@ I've used gulp for some of the above tasks.
 
 * In main.js, in the changePizzaSizes function, var dx is taken out of the for loop, so that it only triggers layout once, thus reducing the time to change pizza size.
 
-* In main.js, in the updatePositions function, var phase is taken out of the for loop, so that it only triggers layout once, thus allowing animation at 60 frames per second.
+* In main.js, in the updatePositions function, the calculations to update the positions are taken out of the for loop, so that it only triggers layout once, thus allowing animation at 60 frames per second.
 
 * In main.js, in the function that generates the sliding pizzas when the page loads, calculates the amount of pizzas needed based on the window size, so that it doesn't need to generate unnecessary pizzas.
